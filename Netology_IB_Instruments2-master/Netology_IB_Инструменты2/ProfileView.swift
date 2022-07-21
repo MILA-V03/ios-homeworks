@@ -15,35 +15,27 @@ class ProfileView: UIView {
     @IBOutlet weak var text: UITextView!
     
     
-    @IBInspectable var textLabelText: String {
-        get {
-            return label.text!
-        }
-        
-        set (textLabelText){
-            label.text = textLabelText
-        }
-    }
+    @IBInspectable var textLabelText: String{
+        return label.text ?? "No text"
     
-    
-    
-    var view: UIView!
+}
+  var view: UIView
     var nibName: String = "ProfileView"
     
-    override init(frame: CGRect) {
+    override init (frame: CGRect) {
+        view = UIView(frame: frame)
         super.init(frame: frame)
         setup()
     }
-    
     required init?(coder aDecoder: NSCoder) {
+        view = UIView(coder: aDecoder)!
         super.init(coder: aDecoder)
         setup()
     }
-    
+
     func loadFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        _ = UINib(nibName: nibName, bundle: bundle)
         return view
     }
     
@@ -55,5 +47,6 @@ class ProfileView: UIView {
         addSubview(view)
     }
 }
+     
 
 
